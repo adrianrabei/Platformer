@@ -8,9 +8,11 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private float horizontal;
     [SerializeField] private float speed = 10f;
-    [SerializeField] private float jumpForce = 5f;
+    [SerializeField] private float jumpForce = 10f;
     private bool isFacingRight = true;
     private bool isGrounded = true;
+    [SerializeField] private GameManager manager;
+    public bool isActive = false;
 
     void Start()
     {
@@ -20,10 +22,13 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
-        horizontal = Input.GetAxis("Horizontal");
-        Movement();
-        Flip();
-        Jump();
+        if(isActive)
+        {
+            horizontal = Input.GetAxis("Horizontal");
+            Movement();
+            Flip();
+            Jump();
+        }
     }
 
     private void Movement()
@@ -31,14 +36,16 @@ public class PlayerController : MonoBehaviour
         if (horizontal != 0)
         {
             player.velocity = new Vector2(horizontal * speed, player.velocity.y);
+            animator.SetInteger("run", 1);
         }
+        animator.SetInteger("run", 0);
     }
 
     private void Jump()
     {
         if(isGrounded)
         {
-            if(Input.GetButton("Jump"))
+            if(Input.GetButtonDown("Jump"))
             {
                 player.velocity = new Vector2(horizontal * speed, jumpForce);
                 animator.SetTrigger("jump");
@@ -46,7 +53,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(player.velocity.y < 0)
         {
-            player.gravityScale = 5;
+            player.gravityScale = 10;
         }
         else player.gravityScale = 1;
     }
