@@ -7,8 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D player;
     private Animator animator;
     private float horizontal;
-    [SerializeField] private float speed = 10f;
-    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float speed = 15f;
+    [SerializeField] private float jumpForce = 15f;
     private bool isFacingRight = true;
     private bool isGrounded = true;
     [SerializeField] private GameManager manager;
@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
     {
         if(isGrounded)
         {
-            if(Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown("Jump"))
             {
                 player.velocity = new Vector2(horizontal * speed, jumpForce);
                 animator.SetTrigger("jump");
@@ -69,6 +69,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+   /* private void Attack()
+    {
+        if(Input.GetButtonDown("Attack"))
+        {
+            
+        }
+    }*/
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
@@ -84,4 +92,16 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "DeathZone" || collision.gameObject.tag == "Death")
+        {
+            animator.SetBool("dead", true);
+            manager.Dead();
+        }
+        else animator.SetBool("dead", false);
+    }
+
+    
 }

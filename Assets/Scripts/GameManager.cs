@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private GameObject Main;
     [SerializeField] private GameObject Game;
     [SerializeField] private GameObject Death;
-    private PlayerController player;
+    [SerializeField] private PlayerController player;
 
     void Start()
     {
@@ -25,6 +25,13 @@ public class GameManager : MonoBehaviour
         Main.SetActive(false);
         Game.SetActive(true);
         player.isActive = true;
+    }
+
+    public void Dead()
+    {
+        Game.SetActive(false);
+        Death.SetActive(true);
+        player.isActive = false;
     }
 
     public void Restart()
