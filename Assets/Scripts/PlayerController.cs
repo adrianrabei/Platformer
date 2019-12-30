@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager manager;
     public bool isActive = false;
 
+
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
@@ -25,15 +26,16 @@ public class PlayerController : MonoBehaviour
     {
         if(isActive)
         {
-            horizontal = Input.GetAxis("Horizontal");
+            horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
             Movement();
             Flip();
             Jump();
             Attack();
+            Slide();
         }
     }
 
-    private void Movement()
+    public void Movement()
     {
         if (horizontal != 0)
         {
@@ -50,11 +52,11 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Jump()
+    public void Jump()
     {
         if(isGrounded)
         {
-            if (Input.GetButtonDown("Jump"))
+            if (CrossPlatformInputManager.GetButtonDown("Jump"))
             {
                 player.velocity = new Vector2(horizontal * speed, jumpForce);
                 animator.SetTrigger("jump");
@@ -78,11 +80,22 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void Attack()
+    public void Attack()
     {
-        if(Input.GetButtonDown("Attack"))
+        if(CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             animator.SetTrigger("attack");
+        }
+    }
+
+    public void Slide()
+    {
+        if(CrossPlatformInputManager.GetButtonDown("Down"))
+        {
+            if(isGrounded)
+            {
+                animator.SetTrigger("slide");
+            }
         }
     }
 
