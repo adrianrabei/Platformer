@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerController : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
             Movement();
             Flip();
             Jump();
+            Attack();
         }
     }
 
@@ -36,9 +38,16 @@ public class PlayerController : MonoBehaviour
         if (horizontal != 0)
         {
             player.velocity = new Vector2(horizontal * speed, player.velocity.y);
-            animator.SetInteger("run", 1);
+
+            if (isGrounded)
+            {
+                animator.SetInteger("run", 1);
+            }
         }
-        animator.SetInteger("run", 0);
+        else
+        {
+            animator.SetInteger("run", 0);
+        }
     }
 
     private void Jump()
@@ -53,7 +62,7 @@ public class PlayerController : MonoBehaviour
         }
         else if(player.velocity.y < 0)
         {
-            player.gravityScale = 10;
+            player.gravityScale = 5;
         }
         else player.gravityScale = 1;
     }
@@ -69,13 +78,13 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-   /* private void Attack()
+    private void Attack()
     {
         if(Input.GetButtonDown("Attack"))
         {
-            
+            animator.SetTrigger("attack");
         }
-    }*/
+    }
 
     private void OnCollisionStay2D(Collision2D collision)
     {
@@ -95,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "DeathZone" || collision.gameObject.tag == "Death")
+        if (collision.gameObject.tag == "Death")
         {
             animator.SetBool("dead", true);
             manager.Dead();

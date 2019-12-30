@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        
+        Time.timeScale = 0;    
     }
 
     void FixedUpdate()
@@ -20,11 +20,13 @@ public class GameManager : MonoBehaviour
         
     }
 
+    
     public void Play()
     {
         Main.SetActive(false);
         Game.SetActive(true);
         player.isActive = true;
+        Time.timeScale = 1;
     }
 
     public void Dead()
