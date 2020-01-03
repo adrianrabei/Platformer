@@ -27,8 +27,9 @@ public class PlayerController : MonoBehaviour
         print(horizontal);
         if(isActive)
         {
-          
-            horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
+
+            // horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
+            horizontal = Input.GetAxis("Horizontal") * speed;
             Movement();
             Flip();
             Jump();
@@ -57,10 +58,11 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
+     
         if(isGrounded)
         {
             if (CrossPlatformInputManager.GetButtonDown("Jump"))
-            {
+            {      
                 player.velocity = new Vector2(horizontal * speed, jumpForce);
                 animator.SetTrigger("jump");
             }
@@ -93,9 +95,10 @@ public class PlayerController : MonoBehaviour
 
     public void Slide()
     {
-        if(CrossPlatformInputManager.GetButtonDown("Down"))
+        if (CrossPlatformInputManager.GetButtonDown("Down") && horizontal!=0)
         {
-            if(isGrounded)
+       
+            if (isGrounded)
             {
                 animator.SetTrigger("slide");
             }
