@@ -24,9 +24,11 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        print(horizontal);
         if(isActive)
         {
-            horizontal = CrossPlatformInputManager.GetAxis("Horizontal");
+          
+            horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
             Movement();
             Flip();
             Jump();
@@ -37,17 +39,18 @@ public class PlayerController : MonoBehaviour
 
     public void Movement()
     {
-        if (horizontal != 0)
+        if (horizontal != 0 )
         {
-            player.velocity = new Vector2(horizontal * speed, player.velocity.y);
+            player.velocity = new Vector2(horizontal, player.velocity.y);
 
-            if (isGrounded)
+            if (isGrounded )
             {
                 animator.SetInteger("run", 1);
             }
         }
-        else
+        else if ( horizontal==0)
         {
+            player.velocity = new Vector2(0, player.velocity.y);
             animator.SetInteger("run", 0);
         }
     }
