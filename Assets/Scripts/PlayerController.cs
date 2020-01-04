@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if(isGrounded)
+        if(isGrounded && !isDown)
         {
             if (CrossPlatformInputManager.GetButtonDown("Jump"))
             {      
