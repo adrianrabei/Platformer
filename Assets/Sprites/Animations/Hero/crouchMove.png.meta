@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 164b6651730568d459a75cdb0b572cae
+guid: 109ea525d12bcaf4ab6dd73cb62bbf27
 TextureImporter:
   fileIDToRecycleName:
-    21300000: newAtk_0
-    21300002: newAtk_1
-    21300004: newAtk_2
-    21300006: newAtk_3
-    21300008: newAtk_4
+    21300000: crouchMove_0
+    21300002: crouchMove_1
+    21300004: crouchMove_2
+    21300006: crouchMove_3
+    21300008: crouchMove_4
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
@@ -111,7 +111,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: newAtk_0
+      name: crouchMove_0
       rect:
         serializedVersion: 2
         x: 0
@@ -125,13 +125,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6466ffdec1c497d46a9e6b4f8a05ba67
+      spriteID: 6ae92385dc41ab642a56634d9ee343ee
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newAtk_1
+      name: crouchMove_1
       rect:
         serializedVersion: 2
         x: 32
@@ -145,13 +145,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a5109322b9e6a1046ab675cd55edecc6
+      spriteID: 4ea683a55cc8d984f9b04806b2e2d3f9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newAtk_2
+      name: crouchMove_2
       rect:
         serializedVersion: 2
         x: 64
@@ -165,13 +165,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a95327c6d9e1d134b83cf1b7408e1b5f
+      spriteID: 43a4162ac5577154498c61caf7e970ea
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newAtk_3
+      name: crouchMove_3
       rect:
         serializedVersion: 2
         x: 96
@@ -185,13 +185,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6ac714647c476b448ba03928907b3702
+      spriteID: 48dcd3be210794241b365bf04400bab2
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: newAtk_4
+      name: crouchMove_4
       rect:
         serializedVersion: 2
         x: 128
@@ -205,7 +205,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecff0b4ea025c254ea59950d66404ff7
+      spriteID: 53e6fd6ab7d00e64f9843fb380263ab6
       vertices: []
       indices: 
       edges: []
@@ -213,7 +213,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 7683479854de1b14f80ee6f82ce13d28
+    spriteID: b7191df56c40e124e979d89b06be25fd
     vertices: []
     indices: 
     edges: []

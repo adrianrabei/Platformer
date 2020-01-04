@@ -15,6 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager manager;
     public bool isActive;
     private bool isFalling;
+    private bool isDown;
 
 
     void Start()
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
         isFacingRight = true;
         isGrounded = true;
         isFalling = false;
+        isDown = false;
+
     }
 
     void FixedUpdate()
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
             Flip();
             Jump();
             Attack();
+            CrouchMove();
         }
     }
 
@@ -71,7 +75,7 @@ public class PlayerController : MonoBehaviour
         else if(player.velocity.y < 0)
         {
             animator.SetBool("falling", true);
-            player.gravityScale = 5;
+            player.gravityScale = 7.5f;
         }
         else
         {
@@ -99,12 +103,33 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Crouch()
+    {
+        isDown = !isDown;
+        if (isDown)
+        {
+            animator.SetBool("crouchStay", true);
+        }
+        else animator.SetBool("crouchStay", false);
+    }
+
+    public void CrouchMove()
+    {
+        if (isDown && horizontal != 0)
+        {
+            player.velocity = new Vector2(horizontal * speed * 0.6f, player.velocity.y);
+            animator.SetBool("crouchMove", true);
+        }
+        else animator.SetBool("crouchMove", false);
+    }
+
     private void OnCollisionStay2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Ground")
         {
             isGrounded = true;
         }
+        
     }
 
     private void OnCollisionExit2D(Collision2D collision)
