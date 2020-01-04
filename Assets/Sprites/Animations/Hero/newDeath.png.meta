@@ -1,18 +1,18 @@
 fileFormatVersion: 2
-guid: 0f2d2fc945b994104986012e439f5bf6
+guid: a028e9d7ceafd6c4fb82c8437e21dc06
 TextureImporter:
   fileIDToRecycleName:
-    21300000: PixelCharAnim_Plain_run_0
-    21300002: PixelCharAnim_Plain_run_1
-    21300004: PixelCharAnim_Plain_run_2
-    21300006: PixelCharAnim_Plain_run_3
-    21300008: PixelCharAnim_Plain_run_4
-    21300010: PixelCharAnim_Plain_run_5
+    21300000: newDeath_0
+    21300002: newDeath_1
+    21300004: newDeath_2
+    21300006: newDeath_3
+    21300008: newDeath_4
+    21300010: newDeath_5
   externalObjects: {}
   serializedVersion: 9
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -33,12 +33,12 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: 16
+    aniso: -1
     mipBias: -100
     wrapU: 1
     wrapV: 1
@@ -66,10 +66,43 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 2
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 8192
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+  - serializedVersion: 2
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -79,7 +112,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_0
+      name: newDeath_0
       rect:
         serializedVersion: 2
         x: 0
@@ -91,15 +124,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 2b52b51770a51b348856400c17b5c22d
+      spriteID: e145dea35cefa5c4c8671457cb6e061b
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_1
+      name: newDeath_1
       rect:
         serializedVersion: 2
         x: 32
@@ -111,15 +144,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 52c96c45fd80a114a8a502fe3567a749
+      spriteID: d2be228546b40144b9eeb43cf51c4a04
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_2
+      name: newDeath_2
       rect:
         serializedVersion: 2
         x: 64
@@ -131,15 +164,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 58f4347ce0a354143958ff5d9748d7d1
+      spriteID: 4d8f6c828b7c63b488db53c9d53b13b6
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_3
+      name: newDeath_3
       rect:
         serializedVersion: 2
         x: 96
@@ -151,15 +184,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 009265db183761140b598c7fe8ab30ae
+      spriteID: 8c986d6c914670b4d9d23ead18543b4d
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_4
+      name: newDeath_4
       rect:
         serializedVersion: 2
         x: 128
@@ -171,15 +204,15 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 677bc181cc41e814a9015f1bba82fc85
+      spriteID: c4433165ceaab44468ec0d573d63cfa9
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: PixelCharAnim_Plain_run_5
+      name: newDeath_5
       rect:
         serializedVersion: 2
         x: 160
@@ -191,9 +224,9 @@ TextureImporter:
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
-      tessellationDetail: -1
+      tessellationDetail: 0
       bones: []
-      spriteID: 81f3a42774203b44ab2781d45ec56d41
+      spriteID: d1ead3a2a00f7544a9223ea3cc5af1d4
       vertices: []
       indices: 
       edges: []
@@ -201,7 +234,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6f885748d7a2ca14cacc007938f14160
     vertices: []
     indices: 
     edges: []
