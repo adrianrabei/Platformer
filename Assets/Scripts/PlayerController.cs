@@ -10,45 +10,48 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     [SerializeField] private float speed = 15f;
     [SerializeField] private float jumpForce = 15f;
-    private bool isFacingRight = true;
-    private bool isGrounded = true;
+    private bool isFacingRight;
+    private bool isGrounded;
     [SerializeField] private GameManager manager;
-    public bool isActive = false;
+    public bool isActive;
+    private bool isFalling;
 
 
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        isActive = false;
+        isFacingRight = true;
+        isGrounded = true;
+        isFalling = false;
     }
 
     void FixedUpdate()
     {
-        print(horizontal);
         if(isActive)
         {
-
-            horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
+            horizontal = Input.GetAxis("Horizontal");
+            //horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
             Movement();
             Flip();
             Jump();
             Attack();
-            Slide();
         }
     }
 
     public void Movement()
     {
-        if (horizontal != 0 )
+        if (horizontal != 0)
         {
-            player.velocity = new Vector2(horizontal, player.velocity.y);
+            player.velocity = new Vector2(horizontal * speed, player.velocity.y);
 
             if (isGrounded )
             {
                 animator.SetInteger("run", 1);
             }
         }
-        else if ( horizontal==0)
+        else if (horizontal == 0)
         {
             player.velocity = new Vector2(0, player.velocity.y);
             animator.SetInteger("run", 0);
@@ -57,7 +60,6 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-     
         if(isGrounded)
         {
             if (CrossPlatformInputManager.GetButtonDown("Jump"))
@@ -68,9 +70,14 @@ public class PlayerController : MonoBehaviour
         }
         else if(player.velocity.y < 0)
         {
+            animator.SetBool("falling", true);
             player.gravityScale = 5;
         }
-        else player.gravityScale = 1;
+        else
+        {
+            animator.SetBool("falling", false);
+            player.gravityScale = 1;
+        }
     }
 
     private void Flip()
@@ -86,21 +93,9 @@ public class PlayerController : MonoBehaviour
 
     public void Attack()
     {
-        if(CrossPlatformInputManager.GetButtonDown("Attack"))
+        if(horizontal == 0 && CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             animator.SetTrigger("attack");
-        }
-    }
-
-    public void Slide()
-    {
-        if (CrossPlatformInputManager.GetButtonDown("Down") && horizontal!=0)
-        {
-       
-            if (isGrounded)
-            {
-                animator.SetTrigger("slide");
-            }
         }
     }
 
@@ -122,7 +117,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Death")
+        if(collision.gameObject.tag == "Death")
         {
             animator.SetBool("dead", true);
             manager.Dead();
