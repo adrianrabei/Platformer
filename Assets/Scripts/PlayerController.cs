@@ -16,18 +16,20 @@ public class PlayerController : MonoBehaviour
     public bool isActive;
     private bool isFalling;
     private bool isDown;
-
+    private bool isInvisible;
+    private SpriteRenderer renderer;
 
     void Start()
     {
         player = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        renderer = GetComponent<SpriteRenderer>();
         isActive = false;
         isFacingRight = true;
         isGrounded = true;
         isFalling = false;
         isDown = false;
-
+        isInvisible = false;
     }
 
     void FixedUpdate()
@@ -40,7 +42,7 @@ public class PlayerController : MonoBehaviour
             Flip();
             Jump();
             Attack();
-            CrouchMove();
+            CrowlMove();
         }
     }
 
@@ -75,7 +77,7 @@ public class PlayerController : MonoBehaviour
         else if(player.velocity.y < 0)
         {
             animator.SetBool("falling", true);
-            player.gravityScale = 7.5f;
+            player.gravityScale = 8;
         }
         else
         {
@@ -100,27 +102,61 @@ public class PlayerController : MonoBehaviour
         if(horizontal == 0 && CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             animator.SetTrigger("attack");
+            if(isInvisible)
+            {
+                renderer.color = new Color(1f, 1f, 1f, 1f);
+                isInvisible = !isInvisible;
+            }
         }
     }
 
-    public void Crouch()
+    public void Crowl()
     {
         isDown = !isDown;
         if (isDown)
         {
-            animator.SetBool("crouchStay", true);
+            animator.SetBool("crowlStay", true);
         }
-        else animator.SetBool("crouchStay", false);
+        else animator.SetBool("crowlStay", false);
     }
 
-    public void CrouchMove()
+    public void CrowlMove()
     {
         if (isDown && horizontal != 0)
         {
             player.velocity = new Vector2(horizontal * speed * 0.6f, player.velocity.y);
-            animator.SetBool("crouchMove", true);
+            animator.SetBool("crowlMove", true);
         }
-        else animator.SetBool("crouchMove", false);
+        else animator.SetBool("crowlMove", false);
+    }
+
+    public void Invis()
+    {
+        isInvisible = !isInvisible;
+        if (isInvisible)
+        {
+            renderer.color = new Color(1f, 1f, 1f, 0.25f);
+        }
+        else renderer.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Death" && !isDown)
+        {
+            animator.SetBool("dead", true);
+            manager.Dead();
+        }
+        else if (collision.gameObject.tag == "Death" && isDown)
+        {
+            animator.SetBool("crawlDead", true);
+            manager.Dead();
+        }
+        else
+        {
+            animator.SetBool("dead", false);
+            animator.SetBool("crawlDead", false);
+        }
     }
 
     private void OnCollisionStay2D(Collision2D collision)
@@ -139,16 +175,4 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
         }
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if(collision.gameObject.tag == "Death")
-        {
-            animator.SetBool("dead", true);
-            manager.Dead();
-        }
-        else animator.SetBool("dead", false);
-    }
-
-    
 }
