@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
+    private Rigidbody2D Enemy;
+    [SerializeField] private float speed;
+    [SerializeField] private Transform groundDetection;
+    private RaycastHit2D groundInfo;
+    [SerializeField] private float distance = 5;
+    private bool isFacingRight;
     void Start()
     {
-        
+        Enemy = GetComponent<Rigidbody2D>();
+        isFacingRight = false;
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        Enemy.transform.Translate(Vector2.left * speed * Time.deltaTime);
+        Patroling();
+    }
+
+    private void Patroling()
+    {
+        groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
+        if(groundInfo.transform.tag == "Ground")
+        {
+            if(isFacingRight)
+            {
+                isFacingRight = !isFacingRight;
+                Vector3 scale = transform.localScale;
+                scale.x *= -1;
+                transform.localScale = scale;
+            }
+        }
     }
 }

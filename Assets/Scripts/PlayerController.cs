@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         if(isActive)
         {
-            horizontal = Input.GetAxis("Horizontal");
-            //horizontal = CrossPlatformInputManager.GetAxis("Horizontal")*speed;
+            //horizontal = Input.GetAxis("Horizontal") * speed;
+            horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
             Movement();
             Flip();
             Jump();
@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
     {
         if (horizontal != 0)
         {
-            player.velocity = new Vector2(horizontal * speed, player.velocity.y);
+            player.velocity = new Vector2(horizontal, player.velocity.y);
 
             if (isGrounded )
             {
@@ -66,15 +66,15 @@ public class PlayerController : MonoBehaviour
 
     public void Jump()
     {
-        if(isGrounded && !isDown)
+        if (CrossPlatformInputManager.GetButtonDown("Jump"))
         {
-            if (CrossPlatformInputManager.GetButtonDown("Jump"))
-            {      
-                player.velocity = new Vector2(horizontal * speed, jumpForce);
+            if (isGrounded && !isDown)
+            {
+                player.velocity = new Vector2(horizontal, jumpForce);
                 animator.SetTrigger("jump");
             }
         }
-        else if(player.velocity.y < 0)
+        else if (player.velocity.y < 0)
         {
             animator.SetBool("falling", true);
             player.gravityScale = 8;
@@ -102,6 +102,7 @@ public class PlayerController : MonoBehaviour
         if(horizontal == 0 && CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             animator.SetTrigger("attack");
+
             if(isInvisible)
             {
                 renderer.color = new Color(1f, 1f, 1f, 1f);
@@ -124,7 +125,7 @@ public class PlayerController : MonoBehaviour
     {
         if (isDown && horizontal != 0)
         {
-            player.velocity = new Vector2(horizontal * speed * 0.6f, player.velocity.y);
+            player.velocity = new Vector2(horizontal, player.velocity.y);
             animator.SetBool("crowlMove", true);
         }
         else animator.SetBool("crowlMove", false);
