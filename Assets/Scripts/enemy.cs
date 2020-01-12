@@ -6,7 +6,7 @@ public class enemy : MonoBehaviour
 {
     private Rigidbody2D Enemy;
     [SerializeField] private float speed;
-    [SerializeField] private Transform groundDetection;
+    [SerializeField] private Transform areaCheck;
     private RaycastHit2D groundInfo;
     [SerializeField] private float distance = 5;
     private bool isFacingRight;
@@ -24,16 +24,18 @@ public class enemy : MonoBehaviour
 
     private void Patroling()
     {
-        groundInfo = Physics2D.Raycast(groundDetection.position, Vector2.down, distance);
-        if(groundInfo.transform.tag == "Ground")
+        groundInfo = Physics2D.Raycast(areaCheck.position, Vector2.down, distance);
+
+        if(groundInfo.collider.tag == "Ground")
         {
-            if(isFacingRight)
+            Debug.Log("bum");
+            /*if(isFacingRight)
             {
                 isFacingRight = !isFacingRight;
                 Vector3 scale = transform.localScale;
                 scale.x *= -1;
                 transform.localScale = scale;
-            }
+            }*/
         }
     }
 }
