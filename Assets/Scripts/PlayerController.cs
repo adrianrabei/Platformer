@@ -14,7 +14,6 @@ public class PlayerController : MonoBehaviour
     private bool isGrounded;
     [SerializeField] private GameManager manager;
     public bool isActive;
-    private bool isFalling;
     private bool isDown;
     private bool isInvisible;
     private SpriteRenderer renderer;
@@ -27,7 +26,6 @@ public class PlayerController : MonoBehaviour
         isActive = false;
         isFacingRight = true;
         isGrounded = true;
-        isFalling = false;
         isDown = false;
         isInvisible = false;
     }
@@ -162,7 +160,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Patrol")
         {
             isGrounded = true;
         }
@@ -171,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Ground")
+        if(collision.gameObject.tag == "Ground" || collision.gameObject.tag == "Patrol")
         {
             isGrounded = false;
         }
