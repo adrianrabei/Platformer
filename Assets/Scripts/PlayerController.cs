@@ -36,8 +36,8 @@ public class PlayerController : MonoBehaviour
     {
         if(isActive)
         {
-            //horizontal = Input.GetAxis("Horizontal") * speed;
-            horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
+            horizontal = Input.GetAxis("Horizontal") * speed;
+            //horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
             Movement();
             Flip();
             Jump();
