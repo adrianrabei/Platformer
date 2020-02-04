@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class fallPlatform : MonoBehaviour
+public class FallPlatform : MonoBehaviour
 {
     [SerializeField] private GameObject player;
     void Start()

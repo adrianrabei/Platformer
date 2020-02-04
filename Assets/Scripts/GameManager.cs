@@ -38,7 +38,7 @@ public class GameManager : MonoBehaviour
         Death.SetActive(true);
         player.isActive = false;
     }
-
+    
     public void Failed()
     {
         Game.SetActive(false);

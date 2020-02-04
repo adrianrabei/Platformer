@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameManager manager;
     public bool isActive;
     private bool isDown;
-    private bool isInvisible;
+    public bool isInvisible;
     private SpriteRenderer renderer;
+    private float timeLeft;
+    public bool strike;
+    [SerializeField] private GameObject attackTrigger;
 
     void Start()
     {
@@ -28,19 +31,21 @@ public class PlayerController : MonoBehaviour
         isGrounded = true;
         isDown = false;
         isInvisible = false;
+        strike = false;
     }
 
     void FixedUpdate()
     {
         if(isActive)
         {
-            //horizontal = Input.GetAxis("Horizontal") * speed;
-            horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
+            horizontal = Input.GetAxis("Horizontal") * speed;
+            //horizontal = CrossPlatformInputManager.GetAxis("Horizontal") * speed;
             Movement();
             Flip();
             Jump();
             Attack();
             CrowlMove();
+            InvisTimer();
         }
     }
 
@@ -100,6 +105,7 @@ public class PlayerController : MonoBehaviour
         if(horizontal == 0 && CrossPlatformInputManager.GetButtonDown("Attack"))
         {
             animator.SetTrigger("attack");
+            attackTrigger.SetActive(true);
 
             if(isInvisible)
             {
@@ -107,6 +113,8 @@ public class PlayerController : MonoBehaviour
                 isInvisible = !isInvisible;
             }
         }
+        
+        
     }
 
     public void Crowl()
@@ -132,11 +140,22 @@ public class PlayerController : MonoBehaviour
     public void Invis()
     {
         isInvisible = !isInvisible;
+        timeLeft = 7f;
         if (isInvisible)
         {
             renderer.color = new Color(1f, 1f, 1f, 0.25f);
         }
         else renderer.color = new Color(1f, 1f, 1f, 1f);
+    }
+
+    private void InvisTimer()
+    {
+        timeLeft -= Time.deltaTime;
+         if(timeLeft < 3)
+            {
+                renderer.color = new Color(1f, 1f, 1f, 1f);
+                isInvisible = !isInvisible;
+            }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -155,6 +174,11 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetBool("dead", false);
             animator.SetBool("crawlDead", false);
+        }
+
+        if(collision.gameObject.tag == "Enemy" && strike)
+        {
+           Debug.Log("Hit");
         }
     }
 
